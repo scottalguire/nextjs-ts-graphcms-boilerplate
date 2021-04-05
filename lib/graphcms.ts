@@ -3,16 +3,12 @@ async function fetchAPI(query, { variables, preview } = {}) {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${
-        preview
-          ? process.env.GRAPHCMS_DEV_AUTH_TOKEN
-          : process.env.GRAPHCMS_PROD_AUTH_TOKEN
-      }`,
+      Authorization: `Bearer ${preview ? process.env.GRAPHCMS_DEV_AUTH_TOKEN : process.env.GRAPHCMS_PROD_AUTH_TOKEN}`
     },
     body: JSON.stringify({
       query,
-      variables,
-    }),
+      variables
+    })
   })
   const json = await res.json()
 
@@ -37,8 +33,8 @@ export async function getPreviewPostBySlug(slug) {
       preview: true,
       variables: {
         stage: 'DRAFT',
-        slug,
-      },
+        slug
+      }
     }
   )
   return data.post
@@ -142,8 +138,8 @@ export async function getPostAndMorePosts(slug, preview) {
       preview,
       variables: {
         stage: preview ? 'DRAFT' : 'PUBLISHED',
-        slug,
-      },
+        slug
+      }
     }
   )
   return data

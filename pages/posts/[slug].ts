@@ -34,12 +34,7 @@ export default function Post({ post, morePosts, preview }) {
                 </title>
                 {/* <meta property="og:image" content={post.ogImage.url} /> */}
               </Head>
-              <PostHeader
-                title={post.title}
-                coverImage={post.coverImage}
-                date={post.date}
-                author={post.author}
-              />
+              <PostHeader title={post.title} coverImage={post.coverImage} date={post.date} author={post.author} />
               <PostBody content={post.content} />
             </article>
             <SectionSeparator />
@@ -57,8 +52,8 @@ export async function getStaticProps({ params, preview = false }) {
     props: {
       preview,
       post: data.post,
-      morePosts: data.morePosts || [],
-    },
+      morePosts: data.morePosts || []
+    }
   }
 }
 
@@ -66,8 +61,8 @@ export async function getStaticPaths() {
   const posts = await getAllPostsWithSlug()
   return {
     paths: posts.map(({ slug }) => ({
-      params: { slug },
+      params: { slug }
     })),
-    fallback: true,
+    fallback: true
   }
 }
